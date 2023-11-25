@@ -7,7 +7,7 @@ interface Direction {
   up: number;
   right: number;
   down: number;
-  left: number
+  left: number;
 }
 
 export class Client {
@@ -19,7 +19,7 @@ export class Client {
   private _mapHeight: number = 600;
   private _mapWidth: number = 900;
   private _direction: Direction = { up: 0, right: 0, down: 0, left: 0 };
-  private _directionInterval: Timer | undefined
+  private _directionInterval: Timer | undefined;
 
   constructor(ws: WebSocket) {
     this._ws = ws;
@@ -31,7 +31,9 @@ export class Client {
     console.log("[->] Client connected");
     const msg = { info: "connected: " + this._id };
     this._ws.send(JSON.stringify(msg));
-    this._ws.send(JSON.stringify({clientPosition:{x:this._x, y:this._y}}))
+    this._ws.send(
+      JSON.stringify({ clientPosition: { x: this._x, y: this._y } })
+    );
   }
 
   get x() {
@@ -48,13 +50,18 @@ export class Client {
   }
 
   public move(direction: Direction) {
-    this._direction = direction
-    clearInterval(this._directionInterval)
+    this._direction = direction;
+    clearInterval(this._directionInterval);
 
     /**
      * Translation
      */
-    if(this._direction.up != 0 || this._direction.right != 0 || this._direction.down != 0 || this._direction.left != 0) {
+    if (
+      this._direction.up != 0 ||
+      this._direction.right != 0 ||
+      this._direction.down != 0 ||
+      this._direction.left != 0
+    ) {
       const distance = this._speed;
       const dx = -((direction.left - direction.right) * distance);
       const dy = -((direction.up - direction.down) * distance);
@@ -68,7 +75,9 @@ export class Client {
         if (newY > 0 && newY < this._mapHeight) {
           this._y = newY;
         }
-        this._ws.send(JSON.stringify({clientPosition:{x:this._x, y:this._y}}))
+        this._ws.send(
+          JSON.stringify({ clientPosition: { x: this._x, y: this._y } })
+        );
       }, 25);
     }
   }

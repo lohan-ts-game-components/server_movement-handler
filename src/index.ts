@@ -60,7 +60,7 @@ const server = Bun.serve({
       }
 
       if (data.clientDirection) {
-        client.move(data.clientDirection)
+        client.move(data.clientDirection);
         return;
       }
 

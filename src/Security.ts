@@ -33,7 +33,7 @@ export class Security {
     }
 
     if (this._messageCount >= this._MAX_MESSAGES_PER_INTERVAL) {
-      console.log(this._messageCount)
+      console.log(this._messageCount);
       this._logs.error("Trop de messages", unpack(message).message);
       return { success: false, error: "TOO_MUCH_MESSAGES" }; // Trop de messages sur un laps de temps définit
     }
