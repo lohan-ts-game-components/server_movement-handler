@@ -18,7 +18,7 @@ export class Logs {
     const logMessage = `${timestamp} - ${message}\n${value}\n----------`;
     this._fs.appendFile("logs/error.log", logMessage, (err) => {
       if (err) {
-        console.error("Can't write in description.log : ", err);
+        console.error("Can't write in error.log : ", err);
       }
     });
   }
@@ -28,7 +28,7 @@ export class Logs {
     const logMessage = `${timestamp} - ${message}\n${value}\n----------`;
     this._fs.appendFile("logs/debug.log", logMessage, (err) => {
       if (err) {
-        console.error("Can't write in description.log : ", err);
+        console.error("Can't write in debug.log : ", err);
       }
     });
   }
